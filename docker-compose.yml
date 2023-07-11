@@ -1,0 +1,57 @@
+version: '3.8'
+services:
+  d2r:
+    build: ./d2rq-0.8.1
+    ports:
+      - 2020:2020
+
+  canatloupe:
+    build: ./cantaloupe-5.0.5
+    ports:
+      - 8182:8182
+      - 8183:8183
+
+  frontend:
+    build: ./friable_frontend
+    ports:
+      - 80:80
+    links:
+      - backend
+
+  backend:
+    build: ./Friable_mongo
+    ports:
+      - 7148:443
+      - 7149:80
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=friable
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=dockerdemo.pfx
+    depends_on:
+      - sql-server
+
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: friable
+      MONGO_INITDB_ROOT_PASSWORD: Masterproef1
+    volumes:
+      - friable:/data/db
+  
+  sql-server:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+      - 1433:1433
+    environment:
+      MSSQL_SA_PASSWORD: Masterproef1
+      ACCEPT_EULA: Y
+    volumes:
+      - friablesql:/data/db
+
+volumes:
+  friable:
+  friablesql:

@@ -1,0 +1,1444 @@
+@prefix map: <#> .
+@prefix db: <> .
+@prefix vocab: <vocab/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix d2rq: <http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#> .
+@prefix jdbc: <http://d2rq.org/terms/jdbc/> .
+@prefix getty: <http://vocab.getty.edu/page/aat/> .
+@prefix d2r: <http://sites.wiwiss.fu-berlin.de/suhl/bizer/d2r-server/config.rdf#> .
+@prefix meta: <http://www4.wiwiss.fu-berlin.de/bizer/d2r-server/metadata#> .
+
+db: a d2r:Server;
+	rdfs:label "Friable D2R Server";
+	d2r:baseURI <https://d2r.greenbush-39a95729.francecentral.azurecontainerapps.io/>;
+	d2r:port 443;
+	d2r:vocabularyIncludeInstances true;
+
+	d2r:sparqlTimeout 300;
+	d2r:pageTimeout 5;
+
+	meta:datasetTitle "Dataset of Friable" ;
+	meta:datasetDescription "Dataset created for the project Friable" ;
+	meta:datasetSource "KMSKB" ;
+
+	meta:operatorName "Jules Desplenter" ;
+	.
+
+map:database a d2rq:Database;
+	d2rq:jdbcDriver "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+	d2rq:jdbcDSN "jdbc:sqlserver://friable.database.windows.net;databaseName=Friable;user=friableadmin;password=Masterproef1";
+	d2rq:username "friableadmin";
+	d2rq:password "Masterproef1";
+	.
+
+# Table dbo.__EFMigrationsHistory
+map:dbo___EFMigrationsHistory a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "dbo/__EFMigrationsHistory/@@dbo.__EFMigrationsHistory.MigrationId|urlify@@";
+	d2rq:class vocab:dbo___EFMigrationsHistory;
+	d2rq:classDefinitionLabel "dbo.__EFMigrationsHistory";
+	.
+map:dbo___EFMigrationsHistory__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo___EFMigrationsHistory;
+	d2rq:property rdfs:label;
+	d2rq:pattern "__EFMigrationsHistory #@@dbo.__EFMigrationsHistory.MigrationId@@";
+	.
+map:dbo___EFMigrationsHistory_MigrationId a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo___EFMigrationsHistory;
+	d2rq:property vocab:dbo___EFMigrationsHistory_MigrationId;
+	d2rq:propertyDefinitionLabel "__EFMigrationsHistory MigrationId";
+	d2rq:column "dbo.__EFMigrationsHistory.MigrationId";
+	.
+map:dbo___EFMigrationsHistory_ProductVersion a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo___EFMigrationsHistory;
+	d2rq:property vocab:dbo___EFMigrationsHistory_ProductVersion;
+	d2rq:propertyDefinitionLabel "__EFMigrationsHistory ProductVersion";
+	d2rq:column "dbo.__EFMigrationsHistory.ProductVersion";
+	.
+
+# Table dbo.Artists
+map:dbo_Artists a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "dbo/Artists/@@dbo.Artists.Id|urlify@@";
+	d2rq:class getty:300025103;
+	d2rq:classDefinitionLabel "dbo.Artists";
+	.
+map:dbo_Artists__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Artists;
+	d2rq:property rdfs:label;
+	d2rq:pattern "Artists #@@dbo.Artists.Id@@";
+	.
+map:dbo_Artists_Id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Artists;
+	d2rq:property vocab:dbo_Artists_Id;
+	d2rq:propertyDefinitionLabel "Artists Id";
+	d2rq:column "dbo.Artists.Id";
+	.
+map:dbo_Artists_SurName a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Artists;
+	d2rq:property vocab:dbo_Artists_SurName;
+	d2rq:propertyDefinitionLabel "Artists SurName";
+	d2rq:column "dbo.Artists.SurName";
+	.
+map:dbo_Artists_FirstName a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Artists;
+	d2rq:property vocab:dbo_Artists_FirstName;
+	d2rq:propertyDefinitionLabel "Artists FirstName";
+	d2rq:column "dbo.Artists.FirstName";
+	.
+map:dbo_Artists_IdentificationId__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Artists;
+	d2rq:property vocab:dbo_Artists_IdentificationId;
+	d2rq:refersToClassMap map:dbo_Identifications;
+	d2rq:join "dbo.Artists.IdentificationId => dbo.Identifications.Id";
+	.
+
+# Table dbo.CollectionMarks
+map:dbo_CollectionMarks a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "dbo/CollectionMarks/@@dbo.CollectionMarks.Id|urlify@@";
+	d2rq:class vocab:dbo_CollectionMarks;
+	d2rq:classDefinitionLabel "dbo.CollectionMarks";
+	.
+map:dbo_CollectionMarks__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_CollectionMarks;
+	d2rq:property rdfs:label;
+	d2rq:pattern "CollectionMarks #@@dbo.CollectionMarks.Id@@";
+	.
+map:dbo_CollectionMarks_Id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_CollectionMarks;
+	d2rq:property vocab:dbo_CollectionMarks_Id;
+	d2rq:propertyDefinitionLabel "CollectionMarks Id";
+	d2rq:column "dbo.CollectionMarks.Id";
+	.
+map:dbo_CollectionMarks_Text a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_CollectionMarks;
+	d2rq:property vocab:dbo_CollectionMarks_Text;
+	d2rq:propertyDefinitionLabel "CollectionMarks Text";
+	d2rq:column "dbo.CollectionMarks.Text";
+	.
+map:dbo_CollectionMarks_Location a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_CollectionMarks;
+	d2rq:property vocab:dbo_CollectionMarks_Location;
+	d2rq:propertyDefinitionLabel "CollectionMarks Location";
+	d2rq:column "dbo.CollectionMarks.Location";
+	.
+map:dbo_CollectionMarks_Media a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_CollectionMarks;
+	d2rq:property vocab:dbo_CollectionMarks_Media;
+	d2rq:propertyDefinitionLabel "CollectionMarks Media";
+	d2rq:column "dbo.CollectionMarks.Media";
+	.
+map:dbo_CollectionMarks_Value a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_CollectionMarks;
+	d2rq:property vocab:dbo_CollectionMarks_Value;
+	d2rq:propertyDefinitionLabel "CollectionMarks Value";
+	d2rq:column "dbo.CollectionMarks.Value";
+	.
+map:dbo_CollectionMarks_IdentificationId__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_CollectionMarks;
+	d2rq:property vocab:dbo_CollectionMarks_IdentificationId;
+	d2rq:refersToClassMap map:dbo_Identifications;
+	d2rq:join "dbo.CollectionMarks.IdentificationId => dbo.Identifications.Id";
+	.
+
+# Table dbo.Dates
+map:dbo_Dates a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "dbo/Dates/@@dbo.Dates.Id|urlify@@";
+	d2rq:class getty:300404507;
+	d2rq:classDefinitionLabel "dbo.Dates";
+	.
+map:dbo_Dates__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Dates;
+	d2rq:property rdfs:label;
+	d2rq:pattern "Dates #@@dbo.Dates.Id@@";
+	.
+map:dbo_Dates_Id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Dates;
+	d2rq:property vocab:dbo_Dates_Id;
+	d2rq:propertyDefinitionLabel "Dates Id";
+	d2rq:column "dbo.Dates.Id";
+	.
+map:dbo_Dates_Text a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Dates;
+	d2rq:property vocab:dbo_Dates_Text;
+	d2rq:propertyDefinitionLabel "Dates Text";
+	d2rq:column "dbo.Dates.Text";
+	.
+map:dbo_Dates_Location a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Dates;
+	d2rq:property vocab:dbo_Dates_Location;
+	d2rq:propertyDefinitionLabel "Dates Location";
+	d2rq:column "dbo.Dates.Location";
+	.
+map:dbo_Dates_Media a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Dates;
+	d2rq:property vocab:dbo_Dates_Media;
+	d2rq:propertyDefinitionLabel "Dates Media";
+	d2rq:column "dbo.Dates.Media";
+	.
+map:dbo_Dates_Value a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Dates;
+	d2rq:property vocab:dbo_Dates_Value;
+	d2rq:propertyDefinitionLabel "Dates Value";
+	d2rq:column "dbo.Dates.Value";
+	.
+map:dbo_Dates_SupposedDate a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Dates;
+	d2rq:property vocab:dbo_Dates_SupposedDate;
+	d2rq:propertyDefinitionLabel "Dates SupposedDate";
+	d2rq:column "dbo.Dates.SupposedDate";
+	.
+map:dbo_Dates_IdentificationId__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Dates;
+	d2rq:property vocab:dbo_Dates_IdentificationId;
+	d2rq:refersToClassMap map:dbo_Identifications;
+	d2rq:join "dbo.Dates.IdentificationId => dbo.Identifications.Id";
+	.
+
+# Table dbo.Framing
+map:dbo_Framing a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "dbo/Framing/@@dbo.Framing.Id|urlify@@";
+	d2rq:class vocab:dbo_Framing;
+	d2rq:classDefinitionLabel "dbo.Framing";
+	.
+map:dbo_Framing__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property rdfs:label;
+	d2rq:pattern "Framing #@@dbo.Framing.Id@@";
+	.
+map:dbo_Framing_Id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_Id;
+	d2rq:propertyDefinitionLabel "Framing Id";
+	d2rq:column "dbo.Framing.Id";
+	.
+map:dbo_Framing_Height a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_Height;
+	d2rq:propertyDefinitionLabel "Framing Height";
+	d2rq:column "dbo.Framing.Height";
+	d2rq:datatype xsd:integer;
+	.
+map:dbo_Framing_Width a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_Width;
+	d2rq:propertyDefinitionLabel "Framing Width";
+	d2rq:column "dbo.Framing.Width";
+	d2rq:datatype xsd:integer;
+	.
+map:dbo_Framing_Depth a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_Depth;
+	d2rq:propertyDefinitionLabel "Framing Depth";
+	d2rq:column "dbo.Framing.Depth";
+	d2rq:datatype xsd:integer;
+	.
+map:dbo_Framing_Shape a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_Shape;
+	d2rq:propertyDefinitionLabel "Framing Shape";
+	d2rq:column "dbo.Framing.Shape";
+	.
+map:dbo_Framing_AppertureFrameHeight a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_AppertureFrameHeight;
+	d2rq:propertyDefinitionLabel "Framing AppertureFrameHeight";
+	d2rq:column "dbo.Framing.AppertureFrameHeight";
+	d2rq:datatype xsd:integer;
+	.
+map:dbo_Framing_ApertureFrameWidth a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_ApertureFrameWidth;
+	d2rq:propertyDefinitionLabel "Framing ApertureFrameWidth";
+	d2rq:column "dbo.Framing.ApertureFrameWidth";
+	d2rq:datatype xsd:integer;
+	.
+map:dbo_Framing_ApretureMountHeight a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_ApretureMountHeight;
+	d2rq:propertyDefinitionLabel "Framing ApretureMountHeight";
+	d2rq:column "dbo.Framing.ApretureMountHeight";
+	d2rq:datatype xsd:integer;
+	.
+map:dbo_Framing_ApertureMountWidth a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_ApertureMountWidth;
+	d2rq:propertyDefinitionLabel "Framing ApertureMountWidth";
+	d2rq:column "dbo.Framing.ApertureMountWidth";
+	d2rq:datatype xsd:integer;
+	.
+map:dbo_Framing_MaxPaintingDimensionsHeight a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_MaxPaintingDimensionsHeight;
+	d2rq:propertyDefinitionLabel "Framing MaxPaintingDimensionsHeight";
+	d2rq:column "dbo.Framing.MaxPaintingDimensionsHeight";
+	d2rq:datatype xsd:integer;
+	.
+map:dbo_Framing_MaxPaintingDimensionsWidth a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_MaxPaintingDimensionsWidth;
+	d2rq:propertyDefinitionLabel "Framing MaxPaintingDimensionsWidth";
+	d2rq:column "dbo.Framing.MaxPaintingDimensionsWidth";
+	d2rq:datatype xsd:integer;
+	.
+map:dbo_Framing_RabbetAccessible a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_RabbetAccessible;
+	d2rq:propertyDefinitionLabel "Framing RabbetAccessible";
+	d2rq:column "dbo.Framing.RabbetAccessible";
+	.
+map:dbo_Framing_RabbetHeight a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_RabbetHeight;
+	d2rq:propertyDefinitionLabel "Framing RabbetHeight";
+	d2rq:column "dbo.Framing.RabbetHeight";
+	d2rq:datatype xsd:integer;
+	.
+map:dbo_Framing_RabbetWidth a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_RabbetWidth;
+	d2rq:propertyDefinitionLabel "Framing RabbetWidth";
+	d2rq:column "dbo.Framing.RabbetWidth";
+	d2rq:datatype xsd:integer;
+	.
+map:dbo_Framing_RabbetDepth a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_RabbetDepth;
+	d2rq:propertyDefinitionLabel "Framing RabbetDepth";
+	d2rq:column "dbo.Framing.RabbetDepth";
+	d2rq:datatype xsd:integer;
+	.
+map:dbo_Framing_InnerSpacersHeight a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_InnerSpacersHeight;
+	d2rq:propertyDefinitionLabel "Framing InnerSpacersHeight";
+	d2rq:column "dbo.Framing.InnerSpacersHeight";
+	d2rq:datatype xsd:integer;
+	.
+map:dbo_Framing_InnerSpacersWidth a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_InnerSpacersWidth;
+	d2rq:propertyDefinitionLabel "Framing InnerSpacersWidth";
+	d2rq:column "dbo.Framing.InnerSpacersWidth";
+	d2rq:datatype xsd:integer;
+	.
+map:dbo_Framing_InnerSpacersDepth a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_InnerSpacersDepth;
+	d2rq:propertyDefinitionLabel "Framing InnerSpacersDepth";
+	d2rq:column "dbo.Framing.InnerSpacersDepth";
+	d2rq:datatype xsd:integer;
+	.
+map:dbo_Framing_ExternalRisingSticksHeight a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_ExternalRisingSticksHeight;
+	d2rq:propertyDefinitionLabel "Framing ExternalRisingSticksHeight";
+	d2rq:column "dbo.Framing.ExternalRisingSticksHeight";
+	d2rq:datatype xsd:integer;
+	.
+map:dbo_Framing_ExternalRisingSticksWidth a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_ExternalRisingSticksWidth;
+	d2rq:propertyDefinitionLabel "Framing ExternalRisingSticksWidth";
+	d2rq:column "dbo.Framing.ExternalRisingSticksWidth";
+	d2rq:datatype xsd:integer;
+	.
+map:dbo_Framing_ExternalRisingSticksDepth a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_ExternalRisingSticksDepth;
+	d2rq:propertyDefinitionLabel "Framing ExternalRisingSticksDepth";
+	d2rq:column "dbo.Framing.ExternalRisingSticksDepth";
+	d2rq:datatype xsd:integer;
+	.
+map:dbo_Framing_DimensionRemarks a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_DimensionRemarks;
+	d2rq:propertyDefinitionLabel "Framing DimensionRemarks";
+	d2rq:column "dbo.Framing.DimensionRemarks";
+	.
+map:dbo_Framing_MouldingMaterial a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_MouldingMaterial;
+	d2rq:propertyDefinitionLabel "Framing MouldingMaterial";
+	d2rq:column "dbo.Framing.MouldingMaterial";
+	.
+map:dbo_Framing_MouldingAssemblage a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_MouldingAssemblage;
+	d2rq:propertyDefinitionLabel "Framing MouldingAssemblage";
+	d2rq:column "dbo.Framing.MouldingAssemblage";
+	.
+map:dbo_Framing_RaisingSticksMaterial a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_RaisingSticksMaterial;
+	d2rq:propertyDefinitionLabel "Framing RaisingSticksMaterial";
+	d2rq:column "dbo.Framing.RaisingSticksMaterial";
+	.
+map:dbo_Framing_RaisingSticksAssemblage a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_RaisingSticksAssemblage;
+	d2rq:propertyDefinitionLabel "Framing RaisingSticksAssemblage";
+	d2rq:column "dbo.Framing.RaisingSticksAssemblage";
+	.
+map:dbo_Framing_InnerSpacers1Serialized a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_InnerSpacers1Serialized;
+	d2rq:propertyDefinitionLabel "Framing InnerSpacers1Serialized";
+	d2rq:column "dbo.Framing.InnerSpacers1Serialized";
+	.
+map:dbo_Framing_InnerSpacers2Serialized a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_InnerSpacers2Serialized;
+	d2rq:propertyDefinitionLabel "Framing InnerSpacers2Serialized";
+	d2rq:column "dbo.Framing.InnerSpacers2Serialized";
+	.
+map:dbo_Framing_BackingBoard2Serialized a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_BackingBoard2Serialized;
+	d2rq:propertyDefinitionLabel "Framing BackingBoard2Serialized";
+	d2rq:column "dbo.Framing.BackingBoard2Serialized";
+	.
+map:dbo_Framing_DamageRelevant a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_DamageRelevant;
+	d2rq:propertyDefinitionLabel "Framing DamageRelevant";
+	d2rq:column "dbo.Framing.DamageRelevant";
+	.
+map:dbo_Framing_SealingSerialized a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_SealingSerialized;
+	d2rq:propertyDefinitionLabel "Framing SealingSerialized";
+	d2rq:column "dbo.Framing.SealingSerialized";
+	.
+map:dbo_Framing_HangingSystem a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_HangingSystem;
+	d2rq:propertyDefinitionLabel "Framing HangingSystem";
+	d2rq:column "dbo.Framing.HangingSystem";
+	.
+map:dbo_Framing_Indicators a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_Indicators;
+	d2rq:propertyDefinitionLabel "Framing Indicators";
+	d2rq:column "dbo.Framing.Indicators";
+	.
+map:dbo_Framing_DescriptionRemarks a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_DescriptionRemarks;
+	d2rq:propertyDefinitionLabel "Framing DescriptionRemarks";
+	d2rq:column "dbo.Framing.DescriptionRemarks";
+	.
+map:dbo_Framing_Material a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_Material;
+	d2rq:propertyDefinitionLabel "Framing Material";
+	d2rq:column "dbo.Framing.Material";
+	.
+map:dbo_Framing_Assemblage a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_Assemblage;
+	d2rq:propertyDefinitionLabel "Framing Assemblage";
+	d2rq:column "dbo.Framing.Assemblage";
+	.
+map:dbo_Framing_GlazingHeight a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_GlazingHeight;
+	d2rq:propertyDefinitionLabel "Framing GlazingHeight";
+	d2rq:column "dbo.Framing.GlazingHeight";
+	d2rq:datatype xsd:integer;
+	.
+map:dbo_Framing_GlazingWidth a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_GlazingWidth;
+	d2rq:propertyDefinitionLabel "Framing GlazingWidth";
+	d2rq:column "dbo.Framing.GlazingWidth";
+	d2rq:datatype xsd:integer;
+	.
+map:dbo_Framing_GlazingEstimation a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_GlazingEstimation;
+	d2rq:propertyDefinitionLabel "Framing GlazingEstimation";
+	d2rq:column "dbo.Framing.GlazingEstimation";
+	.
+map:dbo_Framing_GlazingRemarks a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_GlazingRemarks;
+	d2rq:propertyDefinitionLabel "Framing GlazingRemarks";
+	d2rq:column "dbo.Framing.GlazingRemarks";
+	.
+map:dbo_Framing_OriginalFraming a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_OriginalFraming;
+	d2rq:propertyDefinitionLabel "Framing OriginalFraming";
+	d2rq:column "dbo.Framing.OriginalFraming";
+	.
+map:dbo_Framing_HistoryIndicators a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_HistoryIndicators;
+	d2rq:propertyDefinitionLabel "Framing HistoryIndicators";
+	d2rq:column "dbo.Framing.HistoryIndicators";
+	.
+map:dbo_Framing_LabelsAmount a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_LabelsAmount;
+	d2rq:propertyDefinitionLabel "Framing LabelsAmount";
+	d2rq:column "dbo.Framing.LabelsAmount";
+	d2rq:datatype xsd:integer;
+	.
+map:dbo_Framing_HistoryDescription a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_HistoryDescription;
+	d2rq:propertyDefinitionLabel "Framing HistoryDescription";
+	d2rq:column "dbo.Framing.HistoryDescription";
+	.
+map:dbo_Framing_SurfaceSerialized a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_SurfaceSerialized;
+	d2rq:propertyDefinitionLabel "Framing SurfaceSerialized";
+	d2rq:column "dbo.Framing.SurfaceSerialized";
+	.
+map:dbo_Framing_MechanicalProblemsSerialized a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_MechanicalProblemsSerialized;
+	d2rq:propertyDefinitionLabel "Framing MechanicalProblemsSerialized";
+	d2rq:column "dbo.Framing.MechanicalProblemsSerialized";
+	.
+map:dbo_Framing_ChemicalProblemsSerialized a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_ChemicalProblemsSerialized;
+	d2rq:propertyDefinitionLabel "Framing ChemicalProblemsSerialized";
+	d2rq:column "dbo.Framing.ChemicalProblemsSerialized";
+	.
+map:dbo_Framing_BiologicalProblemsSerialized a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_BiologicalProblemsSerialized;
+	d2rq:propertyDefinitionLabel "Framing BiologicalProblemsSerialized";
+	d2rq:column "dbo.Framing.BiologicalProblemsSerialized";
+	.
+map:dbo_Framing_AestheticProblemsSerialized a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_AestheticProblemsSerialized;
+	d2rq:propertyDefinitionLabel "Framing AestheticProblemsSerialized";
+	d2rq:column "dbo.Framing.AestheticProblemsSerialized";
+	.
+map:dbo_Framing_BackingBoard1Serialized a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_BackingBoard1Serialized;
+	d2rq:propertyDefinitionLabel "Framing BackingBoard1Serialized";
+	d2rq:column "dbo.Framing.BackingBoard1Serialized";
+	.
+map:dbo_Framing_RegistrationID__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Framing;
+	d2rq:property vocab:dbo_Framing_RegistrationID;
+	d2rq:refersToClassMap map:dbo_Registrations;
+	d2rq:join "dbo.Framing.RegistrationID => dbo.Registrations.Id";
+	.
+
+# Table dbo.Identifications
+map:dbo_Identifications a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "dbo/Identifications/@@dbo.Identifications.Id|urlify@@";
+	d2rq:class vocab:dbo_Identifications;
+	d2rq:classDefinitionLabel "dbo.Identifications";
+	.
+map:dbo_Identifications__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Identifications;
+	d2rq:property rdfs:label;
+	d2rq:pattern "Identifications #@@dbo.Identifications.Id@@";
+	.
+map:dbo_Identifications_Id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Identifications;
+	d2rq:property vocab:dbo_Identifications_Id;
+	d2rq:propertyDefinitionLabel "Identifications Id";
+	d2rq:column "dbo.Identifications.Id";
+	.
+map:dbo_Identifications_InventoryNumber a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Identifications;
+	d2rq:property vocab:dbo_Identifications_InventoryNumber;
+	d2rq:propertyDefinitionLabel "Identifications InventoryNumber";
+	d2rq:column "dbo.Identifications.InventoryNumber";
+	d2rq:datatype xsd:integer;
+	.
+map:dbo_Identifications_TitleDutch a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Identifications;
+	d2rq:property vocab:dbo_Identifications_TitleDutch;
+	d2rq:propertyDefinitionLabel "Identifications TitleDutch";
+	d2rq:column "dbo.Identifications.TitleDutch";
+	.
+map:dbo_Identifications_TitleFrench a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Identifications;
+	d2rq:property vocab:dbo_Identifications_TitleFrench;
+	d2rq:propertyDefinitionLabel "Identifications TitleFrench";
+	d2rq:column "dbo.Identifications.TitleFrench";
+	.
+map:dbo_Identifications_Materials a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Identifications;
+	d2rq:property vocab:dbo_Identifications_Materials;
+	d2rq:propertyDefinitionLabel "Identifications Materials";
+	d2rq:column "dbo.Identifications.Materials";
+	.
+map:dbo_Identifications_Techniques a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Identifications;
+	d2rq:property vocab:dbo_Identifications_Techniques;
+	d2rq:propertyDefinitionLabel "Identifications Techniques";
+	d2rq:column "dbo.Identifications.Techniques";
+	.
+map:dbo_Identifications_Support a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Identifications;
+	d2rq:property vocab:dbo_Identifications_Support;
+	d2rq:propertyDefinitionLabel "Identifications Support";
+	d2rq:column "dbo.Identifications.Support";
+	.
+map:dbo_Identifications_FramedSerialized a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Identifications;
+	d2rq:property vocab:dbo_Identifications_FramedSerialized;
+	d2rq:propertyDefinitionLabel "Identifications FramedSerialized";
+	d2rq:column "dbo.Identifications.FramedSerialized";
+	.
+map:dbo_Identifications_Top a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Identifications;
+	d2rq:property vocab:dbo_Identifications_Top;
+	d2rq:propertyDefinitionLabel "Identifications Top";
+	d2rq:column "dbo.Identifications.Top";
+	d2rq:datatype xsd:integer;
+	.
+map:dbo_Identifications_Right a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Identifications;
+	d2rq:property vocab:dbo_Identifications_Right;
+	d2rq:propertyDefinitionLabel "Identifications Right";
+	d2rq:column "dbo.Identifications.Right";
+	d2rq:datatype xsd:integer;
+	.
+map:dbo_Identifications_Bottom a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Identifications;
+	d2rq:property vocab:dbo_Identifications_Bottom;
+	d2rq:propertyDefinitionLabel "Identifications Bottom";
+	d2rq:column "dbo.Identifications.Bottom";
+	d2rq:datatype xsd:integer;
+	.
+map:dbo_Identifications_Left a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Identifications;
+	d2rq:property vocab:dbo_Identifications_Left;
+	d2rq:propertyDefinitionLabel "Identifications Left";
+	d2rq:column "dbo.Identifications.Left";
+	d2rq:datatype xsd:integer;
+	.
+map:dbo_Identifications_Height a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Identifications;
+	d2rq:property vocab:dbo_Identifications_Height;
+	d2rq:propertyDefinitionLabel "Identifications Height";
+	d2rq:column "dbo.Identifications.Height";
+	d2rq:datatype xsd:integer;
+	.
+map:dbo_Identifications_Shape a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Identifications;
+	d2rq:property vocab:dbo_Identifications_Shape;
+	d2rq:propertyDefinitionLabel "Identifications Shape";
+	d2rq:column "dbo.Identifications.Shape";
+	.
+map:dbo_Identifications_Width a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Identifications;
+	d2rq:property vocab:dbo_Identifications_Width;
+	d2rq:propertyDefinitionLabel "Identifications Width";
+	d2rq:column "dbo.Identifications.Width";
+	d2rq:datatype xsd:integer;
+	.
+map:dbo_Identifications_CollectionMarkAccessible a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Identifications;
+	d2rq:property vocab:dbo_Identifications_CollectionMarkAccessible;
+	d2rq:propertyDefinitionLabel "Identifications CollectionMarkAccessible";
+	d2rq:column "dbo.Identifications.CollectionMarkAccessible";
+	.
+map:dbo_Identifications_MyProperty a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Identifications;
+	d2rq:property vocab:dbo_Identifications_MyProperty;
+	d2rq:propertyDefinitionLabel "Identifications MyProperty";
+	d2rq:column "dbo.Identifications.MyProperty";
+	d2rq:datatype xsd:integer;
+	.
+map:dbo_Identifications_RegistrationID__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Identifications;
+	d2rq:property vocab:dbo_Identifications_RegistrationID;
+	d2rq:refersToClassMap map:dbo_Registrations;
+	d2rq:join "dbo.Identifications.RegistrationID => dbo.Registrations.Id";
+	.
+
+# Table dbo.Inscriptions
+map:dbo_Inscriptions a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "dbo/Inscriptions/@@dbo.Inscriptions.Id|urlify@@";
+	d2rq:class vocab:dbo_Inscriptions;
+	d2rq:classDefinitionLabel "dbo.Inscriptions";
+	.
+map:dbo_Inscriptions__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Inscriptions;
+	d2rq:property rdfs:label;
+	d2rq:pattern "Inscriptions #@@dbo.Inscriptions.Id@@";
+	.
+map:dbo_Inscriptions_Id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Inscriptions;
+	d2rq:property vocab:dbo_Inscriptions_Id;
+	d2rq:propertyDefinitionLabel "Inscriptions Id";
+	d2rq:column "dbo.Inscriptions.Id";
+	.
+map:dbo_Inscriptions_Text a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Inscriptions;
+	d2rq:property vocab:dbo_Inscriptions_Text;
+	d2rq:propertyDefinitionLabel "Inscriptions Text";
+	d2rq:column "dbo.Inscriptions.Text";
+	.
+map:dbo_Inscriptions_Location a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Inscriptions;
+	d2rq:property vocab:dbo_Inscriptions_Location;
+	d2rq:propertyDefinitionLabel "Inscriptions Location";
+	d2rq:column "dbo.Inscriptions.Location";
+	.
+map:dbo_Inscriptions_Media a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Inscriptions;
+	d2rq:property vocab:dbo_Inscriptions_Media;
+	d2rq:propertyDefinitionLabel "Inscriptions Media";
+	d2rq:column "dbo.Inscriptions.Media";
+	.
+map:dbo_Inscriptions_Value a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Inscriptions;
+	d2rq:property vocab:dbo_Inscriptions_Value;
+	d2rq:propertyDefinitionLabel "Inscriptions Value";
+	d2rq:column "dbo.Inscriptions.Value";
+	.
+map:dbo_Inscriptions_IdentificationId__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Inscriptions;
+	d2rq:property vocab:dbo_Inscriptions_IdentificationId;
+	d2rq:refersToClassMap map:dbo_Identifications;
+	d2rq:join "dbo.Inscriptions.IdentificationId => dbo.Identifications.Id";
+	.
+
+# Table dbo.Mountings
+map:dbo_Mountings a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "dbo/Mountings/@@dbo.Mountings.Id|urlify@@";
+	d2rq:class vocab:dbo_Mountings;
+	d2rq:classDefinitionLabel "dbo.Mountings";
+	.
+map:dbo_Mountings__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Mountings;
+	d2rq:property rdfs:label;
+	d2rq:pattern "Mountings #@@dbo.Mountings.Id@@";
+	.
+map:dbo_Mountings_Id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Mountings;
+	d2rq:property vocab:dbo_Mountings_Id;
+	d2rq:propertyDefinitionLabel "Mountings Id";
+	d2rq:column "dbo.Mountings.Id";
+	.
+map:dbo_Mountings_NatureSerialized a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Mountings;
+	d2rq:property vocab:dbo_Mountings_NatureSerialized;
+	d2rq:propertyDefinitionLabel "Mountings NatureSerialized";
+	d2rq:column "dbo.Mountings.NatureSerialized";
+	.
+map:dbo_Mountings_AssemblageSerialized a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Mountings;
+	d2rq:property vocab:dbo_Mountings_AssemblageSerialized;
+	d2rq:propertyDefinitionLabel "Mountings AssemblageSerialized";
+	d2rq:column "dbo.Mountings.AssemblageSerialized";
+	.
+map:dbo_Mountings_GeneralCondition a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Mountings;
+	d2rq:property vocab:dbo_Mountings_GeneralCondition;
+	d2rq:propertyDefinitionLabel "Mountings GeneralCondition";
+	d2rq:column "dbo.Mountings.GeneralCondition";
+	.
+map:dbo_Mountings_SurfaceSerialized a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Mountings;
+	d2rq:property vocab:dbo_Mountings_SurfaceSerialized;
+	d2rq:propertyDefinitionLabel "Mountings SurfaceSerialized";
+	d2rq:column "dbo.Mountings.SurfaceSerialized";
+	.
+map:dbo_Mountings_DamageSerialized a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Mountings;
+	d2rq:property vocab:dbo_Mountings_DamageSerialized;
+	d2rq:propertyDefinitionLabel "Mountings DamageSerialized";
+	d2rq:column "dbo.Mountings.DamageSerialized";
+	.
+map:dbo_Mountings_DescriptionRemarks a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Mountings;
+	d2rq:property vocab:dbo_Mountings_DescriptionRemarks;
+	d2rq:propertyDefinitionLabel "Mountings DescriptionRemarks";
+	d2rq:column "dbo.Mountings.DescriptionRemarks";
+	.
+map:dbo_Mountings_ConditionRemarks a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Mountings;
+	d2rq:property vocab:dbo_Mountings_ConditionRemarks;
+	d2rq:propertyDefinitionLabel "Mountings ConditionRemarks";
+	d2rq:column "dbo.Mountings.ConditionRemarks";
+	.
+map:dbo_Mountings_RegistrationID__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Mountings;
+	d2rq:property vocab:dbo_Mountings_RegistrationID;
+	d2rq:refersToClassMap map:dbo_Registrations;
+	d2rq:join "dbo.Mountings.RegistrationID => dbo.Registrations.Id";
+	.
+
+# Table dbo.Pictorials
+map:dbo_Pictorials a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "dbo/Pictorials/@@dbo.Pictorials.Id|urlify@@";
+	d2rq:class getty:300248231;
+	d2rq:classDefinitionLabel "dbo.Pictorials";
+	.
+map:dbo_Pictorials__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Pictorials;
+	d2rq:property rdfs:label;
+	d2rq:pattern "Pictorials #@@dbo.Pictorials.Id@@";
+	.
+map:dbo_Pictorials_Id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Pictorials;
+	d2rq:property vocab:dbo_Pictorials_Id;
+	d2rq:propertyDefinitionLabel "Pictorials Id";
+	d2rq:column "dbo.Pictorials.Id";
+	.
+map:dbo_Pictorials_FriableMediaSerialized a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Pictorials;
+	d2rq:property vocab:dbo_Pictorials_FriableMediaSerialized;
+	d2rq:propertyDefinitionLabel "Pictorials FriableMediaSerialized";
+	d2rq:column "dbo.Pictorials.FriableMediaSerialized";
+	.
+map:dbo_Pictorials_Fixative a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Pictorials;
+	d2rq:property vocab:dbo_Pictorials_Fixative;
+	d2rq:propertyDefinitionLabel "Pictorials Fixative";
+	d2rq:column "dbo.Pictorials.Fixative";
+	.
+map:dbo_Pictorials_OtherMediaSerialized a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Pictorials;
+	d2rq:property vocab:dbo_Pictorials_OtherMediaSerialized;
+	d2rq:propertyDefinitionLabel "Pictorials OtherMediaSerialized";
+	d2rq:column "dbo.Pictorials.OtherMediaSerialized";
+	.
+map:dbo_Pictorials_TechniquesSerialized a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Pictorials;
+	d2rq:property vocab:dbo_Pictorials_TechniquesSerialized;
+	d2rq:propertyDefinitionLabel "Pictorials TechniquesSerialized";
+	d2rq:column "dbo.Pictorials.TechniquesSerialized";
+	.
+map:dbo_Pictorials_RemarksDescription a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Pictorials;
+	d2rq:property vocab:dbo_Pictorials_RemarksDescription;
+	d2rq:propertyDefinitionLabel "Pictorials RemarksDescription";
+	d2rq:column "dbo.Pictorials.RemarksDescription";
+	.
+map:dbo_Pictorials_GeneralCondition a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Pictorials;
+	d2rq:property vocab:dbo_Pictorials_GeneralCondition;
+	d2rq:propertyDefinitionLabel "Pictorials GeneralCondition";
+	d2rq:column "dbo.Pictorials.GeneralCondition";
+	.
+map:dbo_Pictorials_SurfaceSerialized a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Pictorials;
+	d2rq:property vocab:dbo_Pictorials_SurfaceSerialized;
+	d2rq:propertyDefinitionLabel "Pictorials SurfaceSerialized";
+	d2rq:column "dbo.Pictorials.SurfaceSerialized";
+	.
+map:dbo_Pictorials_DamageSerialized a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Pictorials;
+	d2rq:property vocab:dbo_Pictorials_DamageSerialized;
+	d2rq:propertyDefinitionLabel "Pictorials DamageSerialized";
+	d2rq:column "dbo.Pictorials.DamageSerialized";
+	.
+map:dbo_Pictorials_RemarksCondition a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Pictorials;
+	d2rq:property vocab:dbo_Pictorials_RemarksCondition;
+	d2rq:propertyDefinitionLabel "Pictorials RemarksCondition";
+	d2rq:column "dbo.Pictorials.RemarksCondition";
+	.
+map:dbo_Pictorials_FixativeIndicators a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Pictorials;
+	d2rq:property vocab:dbo_Pictorials_FixativeIndicators;
+	d2rq:propertyDefinitionLabel "Pictorials FixativeIndicators";
+	d2rq:column "dbo.Pictorials.FixativeIndicators";
+	.
+map:dbo_Pictorials_PictorialAccessible a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Pictorials;
+	d2rq:property vocab:dbo_Pictorials_PictorialAccessible;
+	d2rq:propertyDefinitionLabel "Pictorials PictorialAccessible";
+	d2rq:column "dbo.Pictorials.PictorialAccessible";
+	.
+map:dbo_Pictorials_SupportId__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Pictorials;
+	d2rq:property vocab:dbo_Pictorials_SupportId;
+	d2rq:refersToClassMap map:dbo_Supports;
+	d2rq:join "dbo.Pictorials.SupportId => dbo.Supports.Id";
+	.
+
+# Table dbo.Registrations
+map:dbo_Registrations a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "dbo/Registrations/@@dbo.Registrations.Id|urlify@@";
+	d2rq:class vocab:dbo_Registrations;
+	d2rq:classDefinitionLabel "dbo.Registrations";
+	.
+map:dbo_Registrations__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Registrations;
+	d2rq:property rdfs:label;
+	d2rq:pattern "Registrations #@@dbo.Registrations.Id@@";
+	.
+map:dbo_Registrations_Id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Registrations;
+	d2rq:property vocab:dbo_Registrations_Id;
+	d2rq:propertyDefinitionLabel "Registrations Id";
+	d2rq:column "dbo.Registrations.Id";
+	.
+map:dbo_Registrations_Name a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Registrations;
+	d2rq:property vocab:dbo_Registrations_Name;
+	d2rq:propertyDefinitionLabel "Registrations Name";
+	d2rq:column "dbo.Registrations.Name";
+	.
+map:dbo_Registrations_Function a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Registrations;
+	d2rq:property vocab:dbo_Registrations_Function;
+	d2rq:propertyDefinitionLabel "Registrations Function";
+	d2rq:column "dbo.Registrations.Function";
+	.
+map:dbo_Registrations_Reason a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Registrations;
+	d2rq:property vocab:dbo_Registrations_Reason;
+	d2rq:propertyDefinitionLabel "Registrations Reason";
+	d2rq:column "dbo.Registrations.Reason";
+	.
+map:dbo_Registrations_Version a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Registrations;
+	d2rq:property vocab:dbo_Registrations_Version;
+	d2rq:propertyDefinitionLabel "Registrations Version";
+	d2rq:column "dbo.Registrations.Version";
+	d2rq:datatype xsd:integer;
+	.
+map:dbo_Registrations_Remarks a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Registrations;
+	d2rq:property vocab:dbo_Registrations_Remarks;
+	d2rq:propertyDefinitionLabel "Registrations Remarks";
+	d2rq:column "dbo.Registrations.Remarks";
+	.
+map:dbo_Registrations_Date a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Registrations;
+	d2rq:property vocab:dbo_Registrations_Date;
+	d2rq:propertyDefinitionLabel "Registrations Date";
+	d2rq:column "dbo.Registrations.Date";
+	.
+
+# Table dbo.SecondaryPictorial
+map:dbo_SecondaryPictorial a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "dbo/SecondaryPictorial/@@dbo.SecondaryPictorial.Id|urlify@@";
+	d2rq:class getty:300248231;
+	d2rq:classDefinitionLabel "dbo.SecondaryPictorial";
+	.
+map:dbo_SecondaryPictorial__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondaryPictorial;
+	d2rq:property rdfs:label;
+	d2rq:pattern "SecondaryPictorial #@@dbo.SecondaryPictorial.Id@@";
+	.
+map:dbo_SecondaryPictorial_Id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondaryPictorial;
+	d2rq:property vocab:dbo_SecondaryPictorial_Id;
+	d2rq:propertyDefinitionLabel "SecondaryPictorial Id";
+	d2rq:column "dbo.SecondaryPictorial.Id";
+	.
+map:dbo_SecondaryPictorial_FriableMediaSerialized a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondaryPictorial;
+	d2rq:property vocab:dbo_SecondaryPictorial_FriableMediaSerialized;
+	d2rq:propertyDefinitionLabel "SecondaryPictorial FriableMediaSerialized";
+	d2rq:column "dbo.SecondaryPictorial.FriableMediaSerialized";
+	.
+map:dbo_SecondaryPictorial_Fixative a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondaryPictorial;
+	d2rq:property vocab:dbo_SecondaryPictorial_Fixative;
+	d2rq:propertyDefinitionLabel "SecondaryPictorial Fixative";
+	d2rq:column "dbo.SecondaryPictorial.Fixative";
+	.
+map:dbo_SecondaryPictorial_OtherMediaSerialized a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondaryPictorial;
+	d2rq:property vocab:dbo_SecondaryPictorial_OtherMediaSerialized;
+	d2rq:propertyDefinitionLabel "SecondaryPictorial OtherMediaSerialized";
+	d2rq:column "dbo.SecondaryPictorial.OtherMediaSerialized";
+	.
+map:dbo_SecondaryPictorial_TechniquesSerialized a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondaryPictorial;
+	d2rq:property vocab:dbo_SecondaryPictorial_TechniquesSerialized;
+	d2rq:propertyDefinitionLabel "SecondaryPictorial TechniquesSerialized";
+	d2rq:column "dbo.SecondaryPictorial.TechniquesSerialized";
+	.
+map:dbo_SecondaryPictorial_RemarksDescription a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondaryPictorial;
+	d2rq:property vocab:dbo_SecondaryPictorial_RemarksDescription;
+	d2rq:propertyDefinitionLabel "SecondaryPictorial RemarksDescription";
+	d2rq:column "dbo.SecondaryPictorial.RemarksDescription";
+	.
+map:dbo_SecondaryPictorial_GeneralCondition a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondaryPictorial;
+	d2rq:property vocab:dbo_SecondaryPictorial_GeneralCondition;
+	d2rq:propertyDefinitionLabel "SecondaryPictorial GeneralCondition";
+	d2rq:column "dbo.SecondaryPictorial.GeneralCondition";
+	.
+map:dbo_SecondaryPictorial_SurfaceSerialized a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondaryPictorial;
+	d2rq:property vocab:dbo_SecondaryPictorial_SurfaceSerialized;
+	d2rq:propertyDefinitionLabel "SecondaryPictorial SurfaceSerialized";
+	d2rq:column "dbo.SecondaryPictorial.SurfaceSerialized";
+	.
+map:dbo_SecondaryPictorial_DamageSerialized a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondaryPictorial;
+	d2rq:property vocab:dbo_SecondaryPictorial_DamageSerialized;
+	d2rq:propertyDefinitionLabel "SecondaryPictorial DamageSerialized";
+	d2rq:column "dbo.SecondaryPictorial.DamageSerialized";
+	.
+map:dbo_SecondaryPictorial_RemarksCondition a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondaryPictorial;
+	d2rq:property vocab:dbo_SecondaryPictorial_RemarksCondition;
+	d2rq:propertyDefinitionLabel "SecondaryPictorial RemarksCondition";
+	d2rq:column "dbo.SecondaryPictorial.RemarksCondition";
+	.
+map:dbo_SecondaryPictorial_FixativeIndicators a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondaryPictorial;
+	d2rq:property vocab:dbo_SecondaryPictorial_FixativeIndicators;
+	d2rq:propertyDefinitionLabel "SecondaryPictorial FixativeIndicators";
+	d2rq:column "dbo.SecondaryPictorial.FixativeIndicators";
+	.
+map:dbo_SecondaryPictorial_PictorialAccessible a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondaryPictorial;
+	d2rq:property vocab:dbo_SecondaryPictorial_PictorialAccessible;
+	d2rq:propertyDefinitionLabel "SecondaryPictorial PictorialAccessible";
+	d2rq:column "dbo.SecondaryPictorial.PictorialAccessible";
+	.
+map:dbo_SecondaryPictorial_SupportId__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondaryPictorial;
+	d2rq:property vocab:dbo_SecondaryPictorial_SupportId;
+	d2rq:refersToClassMap map:dbo_SecondarySupport;
+	d2rq:join "dbo.SecondaryPictorial.SupportId => dbo.SecondarySupport.Id";
+	.
+
+# Table dbo.SecondarySupport
+map:dbo_SecondarySupport a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "dbo/SecondarySupport/@@dbo.SecondarySupport.Id|urlify@@";
+	d2rq:class getty:300389686;
+	d2rq:classDefinitionLabel "dbo.SecondarySupport";
+	.
+map:dbo_SecondarySupport__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondarySupport;
+	d2rq:property rdfs:label;
+	d2rq:pattern "SecondarySupport #@@dbo.SecondarySupport.Id@@";
+	.
+map:dbo_SecondarySupport_Id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondarySupport;
+	d2rq:property vocab:dbo_SecondarySupport_Id;
+	d2rq:propertyDefinitionLabel "SecondarySupport Id";
+	d2rq:column "dbo.SecondarySupport.Id";
+	.
+map:dbo_SecondarySupport_MaterialSerialized a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondarySupport;
+	d2rq:property vocab:dbo_SecondarySupport_MaterialSerialized;
+	d2rq:propertyDefinitionLabel "SecondarySupport MaterialSerialized";
+	d2rq:column "dbo.SecondarySupport.MaterialSerialized";
+	.
+map:dbo_SecondarySupport_PaperType1 a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondarySupport;
+	d2rq:property vocab:dbo_SecondarySupport_PaperType1;
+	d2rq:propertyDefinitionLabel "SecondarySupport PaperType1";
+	d2rq:column "dbo.SecondarySupport.PaperType1";
+	.
+map:dbo_SecondarySupport_PaperType2 a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondarySupport;
+	d2rq:property vocab:dbo_SecondarySupport_PaperType2;
+	d2rq:propertyDefinitionLabel "SecondarySupport PaperType2";
+	d2rq:column "dbo.SecondarySupport.PaperType2";
+	.
+map:dbo_SecondarySupport_PaperType3Serialized a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondarySupport;
+	d2rq:property vocab:dbo_SecondarySupport_PaperType3Serialized;
+	d2rq:propertyDefinitionLabel "SecondarySupport PaperType3Serialized";
+	d2rq:column "dbo.SecondarySupport.PaperType3Serialized";
+	.
+map:dbo_SecondarySupport_Assemblage a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondarySupport;
+	d2rq:property vocab:dbo_SecondarySupport_Assemblage;
+	d2rq:propertyDefinitionLabel "SecondarySupport Assemblage";
+	d2rq:column "dbo.SecondarySupport.Assemblage";
+	.
+map:dbo_SecondarySupport_RectoVerso a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondarySupport;
+	d2rq:property vocab:dbo_SecondarySupport_RectoVerso;
+	d2rq:propertyDefinitionLabel "SecondarySupport RectoVerso";
+	d2rq:column "dbo.SecondarySupport.RectoVerso";
+	.
+map:dbo_SecondarySupport_Watermark a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondarySupport;
+	d2rq:property vocab:dbo_SecondarySupport_Watermark;
+	d2rq:propertyDefinitionLabel "SecondarySupport Watermark";
+	d2rq:column "dbo.SecondarySupport.Watermark";
+	.
+map:dbo_SecondarySupport_WatermarkDescription a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondarySupport;
+	d2rq:property vocab:dbo_SecondarySupport_WatermarkDescription;
+	d2rq:propertyDefinitionLabel "SecondarySupport WatermarkDescription";
+	d2rq:column "dbo.SecondarySupport.WatermarkDescription";
+	.
+map:dbo_SecondarySupport_WatermarkLocation a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondarySupport;
+	d2rq:property vocab:dbo_SecondarySupport_WatermarkLocation;
+	d2rq:propertyDefinitionLabel "SecondarySupport WatermarkLocation";
+	d2rq:column "dbo.SecondarySupport.WatermarkLocation";
+	.
+map:dbo_SecondarySupport_Pinholed a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondarySupport;
+	d2rq:property vocab:dbo_SecondarySupport_Pinholed;
+	d2rq:propertyDefinitionLabel "SecondarySupport Pinholed";
+	d2rq:column "dbo.SecondarySupport.Pinholed";
+	.
+map:dbo_SecondarySupport_Amount a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondarySupport;
+	d2rq:property vocab:dbo_SecondarySupport_Amount;
+	d2rq:propertyDefinitionLabel "SecondarySupport Amount";
+	d2rq:column "dbo.SecondarySupport.Amount";
+	d2rq:datatype xsd:integer;
+	.
+map:dbo_SecondarySupport_Location a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondarySupport;
+	d2rq:property vocab:dbo_SecondarySupport_Location;
+	d2rq:propertyDefinitionLabel "SecondarySupport Location";
+	d2rq:column "dbo.SecondarySupport.Location";
+	.
+map:dbo_SecondarySupport_RemarksDescription a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondarySupport;
+	d2rq:property vocab:dbo_SecondarySupport_RemarksDescription;
+	d2rq:propertyDefinitionLabel "SecondarySupport RemarksDescription";
+	d2rq:column "dbo.SecondarySupport.RemarksDescription";
+	.
+map:dbo_SecondarySupport_GeneralCondition a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondarySupport;
+	d2rq:property vocab:dbo_SecondarySupport_GeneralCondition;
+	d2rq:propertyDefinitionLabel "SecondarySupport GeneralCondition";
+	d2rq:column "dbo.SecondarySupport.GeneralCondition";
+	.
+map:dbo_SecondarySupport_SurfaceSerialized a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondarySupport;
+	d2rq:property vocab:dbo_SecondarySupport_SurfaceSerialized;
+	d2rq:propertyDefinitionLabel "SecondarySupport SurfaceSerialized";
+	d2rq:column "dbo.SecondarySupport.SurfaceSerialized";
+	.
+map:dbo_SecondarySupport_DamageSerialized a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondarySupport;
+	d2rq:property vocab:dbo_SecondarySupport_DamageSerialized;
+	d2rq:propertyDefinitionLabel "SecondarySupport DamageSerialized";
+	d2rq:column "dbo.SecondarySupport.DamageSerialized";
+	.
+map:dbo_SecondarySupport_RemarksCondition a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondarySupport;
+	d2rq:property vocab:dbo_SecondarySupport_RemarksCondition;
+	d2rq:propertyDefinitionLabel "SecondarySupport RemarksCondition";
+	d2rq:column "dbo.SecondarySupport.RemarksCondition";
+	.
+map:dbo_SecondarySupport_PinholesDescription a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondarySupport;
+	d2rq:property vocab:dbo_SecondarySupport_PinholesDescription;
+	d2rq:propertyDefinitionLabel "SecondarySupport PinholesDescription";
+	d2rq:column "dbo.SecondarySupport.PinholesDescription";
+	.
+map:dbo_SecondarySupport_PinholesLocation a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondarySupport;
+	d2rq:property vocab:dbo_SecondarySupport_PinholesLocation;
+	d2rq:propertyDefinitionLabel "SecondarySupport PinholesLocation";
+	d2rq:column "dbo.SecondarySupport.PinholesLocation";
+	.
+map:dbo_SecondarySupport_Based a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondarySupport;
+	d2rq:property vocab:dbo_SecondarySupport_Based;
+	d2rq:propertyDefinitionLabel "SecondarySupport Based";
+	d2rq:column "dbo.SecondarySupport.Based";
+	.
+map:dbo_SecondarySupport_Attachment a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondarySupport;
+	d2rq:property vocab:dbo_SecondarySupport_Attachment;
+	d2rq:propertyDefinitionLabel "SecondarySupport Attachment";
+	d2rq:column "dbo.SecondarySupport.Attachment";
+	.
+map:dbo_SecondarySupport_SupportAccessible a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondarySupport;
+	d2rq:property vocab:dbo_SecondarySupport_SupportAccessible;
+	d2rq:propertyDefinitionLabel "SecondarySupport SupportAccessible";
+	d2rq:column "dbo.SecondarySupport.SupportAccessible";
+	.
+map:dbo_SecondarySupport_RegistrationID__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_SecondarySupport;
+	d2rq:property vocab:dbo_SecondarySupport_RegistrationID;
+	d2rq:refersToClassMap map:dbo_Registrations;
+	d2rq:join "dbo.SecondarySupport.RegistrationID => dbo.Registrations.Id";
+	.
+
+# Table dbo.Signatures
+map:dbo_Signatures a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "dbo/Signatures/@@dbo.Signatures.Id|urlify@@";
+	d2rq:class vocab:dbo_Signatures;
+	d2rq:classDefinitionLabel "dbo.Signatures";
+	.
+map:dbo_Signatures__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Signatures;
+	d2rq:property rdfs:label;
+	d2rq:pattern "Signatures #@@dbo.Signatures.Id@@";
+	.
+map:dbo_Signatures_Id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Signatures;
+	d2rq:property vocab:dbo_Signatures_Id;
+	d2rq:propertyDefinitionLabel "Signatures Id";
+	d2rq:column "dbo.Signatures.Id";
+	.
+map:dbo_Signatures_Text a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Signatures;
+	d2rq:property vocab:dbo_Signatures_Text;
+	d2rq:propertyDefinitionLabel "Signatures Text";
+	d2rq:column "dbo.Signatures.Text";
+	.
+map:dbo_Signatures_Location a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Signatures;
+	d2rq:property vocab:dbo_Signatures_Location;
+	d2rq:propertyDefinitionLabel "Signatures Location";
+	d2rq:column "dbo.Signatures.Location";
+	.
+map:dbo_Signatures_Media a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Signatures;
+	d2rq:property vocab:dbo_Signatures_Media;
+	d2rq:propertyDefinitionLabel "Signatures Media";
+	d2rq:column "dbo.Signatures.Media";
+	.
+map:dbo_Signatures_Value a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Signatures;
+	d2rq:property vocab:dbo_Signatures_Value;
+	d2rq:propertyDefinitionLabel "Signatures Value";
+	d2rq:column "dbo.Signatures.Value";
+	.
+map:dbo_Signatures_IdentificationId__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Signatures;
+	d2rq:property vocab:dbo_Signatures_IdentificationId;
+	d2rq:refersToClassMap map:dbo_Identifications;
+	d2rq:join "dbo.Signatures.IdentificationId => dbo.Identifications.Id";
+	.
+
+# Table dbo.Storages
+map:dbo_Storages a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "dbo/Storages/@@dbo.Storages.Id|urlify@@";
+	d2rq:class vocab:dbo_Storages;
+	d2rq:classDefinitionLabel "dbo.Storages";
+	.
+map:dbo_Storages__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Storages;
+	d2rq:property rdfs:label;
+	d2rq:pattern "Storages #@@dbo.Storages.Id@@";
+	.
+map:dbo_Storages_Id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Storages;
+	d2rq:property vocab:dbo_Storages_Id;
+	d2rq:propertyDefinitionLabel "Storages Id";
+	d2rq:column "dbo.Storages.Id";
+	.
+map:dbo_Storages_Location a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Storages;
+	d2rq:property vocab:dbo_Storages_Location;
+	d2rq:propertyDefinitionLabel "Storages Location";
+	d2rq:column "dbo.Storages.Location";
+	.
+map:dbo_Storages_LocationNumber a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Storages;
+	d2rq:property vocab:dbo_Storages_LocationNumber;
+	d2rq:propertyDefinitionLabel "Storages LocationNumber";
+	d2rq:column "dbo.Storages.LocationNumber";
+	.
+map:dbo_Storages_StorageType a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Storages;
+	d2rq:property vocab:dbo_Storages_StorageType;
+	d2rq:propertyDefinitionLabel "Storages StorageType";
+	d2rq:column "dbo.Storages.StorageType";
+	.
+map:dbo_Storages_MaterialSerialized a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Storages;
+	d2rq:property vocab:dbo_Storages_MaterialSerialized;
+	d2rq:propertyDefinitionLabel "Storages MaterialSerialized";
+	d2rq:column "dbo.Storages.MaterialSerialized";
+	.
+map:dbo_Storages_Remarks a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Storages;
+	d2rq:property vocab:dbo_Storages_Remarks;
+	d2rq:propertyDefinitionLabel "Storages Remarks";
+	d2rq:column "dbo.Storages.Remarks";
+	.
+map:dbo_Storages_RegistrationID__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Storages;
+	d2rq:property vocab:dbo_Storages_RegistrationID;
+	d2rq:refersToClassMap map:dbo_Registrations;
+	d2rq:join "dbo.Storages.RegistrationID => dbo.Registrations.Id";
+	.
+
+# Table dbo.Supports
+map:dbo_Supports a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "dbo/Supports/@@dbo.Supports.Id|urlify@@";
+	d2rq:class getty:300389685;
+	d2rq:classDefinitionLabel "dbo.Supports";
+	.
+map:dbo_Supports__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Supports;
+	d2rq:property rdfs:label;
+	d2rq:pattern "Supports #@@dbo.Supports.Id@@";
+	.
+map:dbo_Supports_Id a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Supports;
+	d2rq:property vocab:dbo_Supports_Id;
+	d2rq:propertyDefinitionLabel "Supports Id";
+	d2rq:column "dbo.Supports.Id";
+	.
+map:dbo_Supports_MaterialSerialized a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Supports;
+	d2rq:property vocab:dbo_Supports_MaterialSerialized;
+	d2rq:propertyDefinitionLabel "Supports MaterialSerialized";
+	d2rq:column "dbo.Supports.MaterialSerialized";
+	.
+map:dbo_Supports_PaperType1 a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Supports;
+	d2rq:property vocab:dbo_Supports_PaperType1;
+	d2rq:propertyDefinitionLabel "Supports PaperType1";
+	d2rq:column "dbo.Supports.PaperType1";
+	.
+map:dbo_Supports_PaperType2 a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Supports;
+	d2rq:property vocab:dbo_Supports_PaperType2;
+	d2rq:propertyDefinitionLabel "Supports PaperType2";
+	d2rq:column "dbo.Supports.PaperType2";
+	.
+map:dbo_Supports_PaperType3Serialized a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Supports;
+	d2rq:property vocab:dbo_Supports_PaperType3Serialized;
+	d2rq:propertyDefinitionLabel "Supports PaperType3Serialized";
+	d2rq:column "dbo.Supports.PaperType3Serialized";
+	.
+map:dbo_Supports_Assemblage a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Supports;
+	d2rq:property vocab:dbo_Supports_Assemblage;
+	d2rq:propertyDefinitionLabel "Supports Assemblage";
+	d2rq:column "dbo.Supports.Assemblage";
+	.
+map:dbo_Supports_RectoVerso a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Supports;
+	d2rq:property vocab:dbo_Supports_RectoVerso;
+	d2rq:propertyDefinitionLabel "Supports RectoVerso";
+	d2rq:column "dbo.Supports.RectoVerso";
+	.
+map:dbo_Supports_Watermark a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Supports;
+	d2rq:property vocab:dbo_Supports_Watermark;
+	d2rq:propertyDefinitionLabel "Supports Watermark";
+	d2rq:column "dbo.Supports.Watermark";
+	.
+map:dbo_Supports_WatermarkDescription a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Supports;
+	d2rq:property vocab:dbo_Supports_WatermarkDescription;
+	d2rq:propertyDefinitionLabel "Supports WatermarkDescription";
+	d2rq:column "dbo.Supports.WatermarkDescription";
+	.
+map:dbo_Supports_WatermarkLocation a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Supports;
+	d2rq:property vocab:dbo_Supports_WatermarkLocation;
+	d2rq:propertyDefinitionLabel "Supports WatermarkLocation";
+	d2rq:column "dbo.Supports.WatermarkLocation";
+	.
+map:dbo_Supports_Pinholed a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Supports;
+	d2rq:property vocab:dbo_Supports_Pinholed;
+	d2rq:propertyDefinitionLabel "Supports Pinholed";
+	d2rq:column "dbo.Supports.Pinholed";
+	.
+map:dbo_Supports_Amount a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Supports;
+	d2rq:property vocab:dbo_Supports_Amount;
+	d2rq:propertyDefinitionLabel "Supports Amount";
+	d2rq:column "dbo.Supports.Amount";
+	d2rq:datatype xsd:integer;
+	.
+map:dbo_Supports_Location a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Supports;
+	d2rq:property vocab:dbo_Supports_Location;
+	d2rq:propertyDefinitionLabel "Supports Location";
+	d2rq:column "dbo.Supports.Location";
+	.
+map:dbo_Supports_RemarksDescription a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Supports;
+	d2rq:property vocab:dbo_Supports_RemarksDescription;
+	d2rq:propertyDefinitionLabel "Supports RemarksDescription";
+	d2rq:column "dbo.Supports.RemarksDescription";
+	.
+map:dbo_Supports_GeneralCondition a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Supports;
+	d2rq:property vocab:dbo_Supports_GeneralCondition;
+	d2rq:propertyDefinitionLabel "Supports GeneralCondition";
+	d2rq:column "dbo.Supports.GeneralCondition";
+	.
+map:dbo_Supports_SurfaceSerialized a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Supports;
+	d2rq:property vocab:dbo_Supports_SurfaceSerialized;
+	d2rq:propertyDefinitionLabel "Supports SurfaceSerialized";
+	d2rq:column "dbo.Supports.SurfaceSerialized";
+	.
+map:dbo_Supports_DamageSerialized a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Supports;
+	d2rq:property vocab:dbo_Supports_DamageSerialized;
+	d2rq:propertyDefinitionLabel "Supports DamageSerialized";
+	d2rq:column "dbo.Supports.DamageSerialized";
+	.
+map:dbo_Supports_RemarksCondition a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Supports;
+	d2rq:property vocab:dbo_Supports_RemarksCondition;
+	d2rq:propertyDefinitionLabel "Supports RemarksCondition";
+	d2rq:column "dbo.Supports.RemarksCondition";
+	.
+map:dbo_Supports_PinholesDescription a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Supports;
+	d2rq:property vocab:dbo_Supports_PinholesDescription;
+	d2rq:propertyDefinitionLabel "Supports PinholesDescription";
+	d2rq:column "dbo.Supports.PinholesDescription";
+	.
+map:dbo_Supports_PinholesLocation a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Supports;
+	d2rq:property vocab:dbo_Supports_PinholesLocation;
+	d2rq:propertyDefinitionLabel "Supports PinholesLocation";
+	d2rq:column "dbo.Supports.PinholesLocation";
+	.
+map:dbo_Supports_Based a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Supports;
+	d2rq:property vocab:dbo_Supports_Based;
+	d2rq:propertyDefinitionLabel "Supports Based";
+	d2rq:column "dbo.Supports.Based";
+	.
+map:dbo_Supports_Attachment a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Supports;
+	d2rq:property vocab:dbo_Supports_Attachment;
+	d2rq:propertyDefinitionLabel "Supports Attachment";
+	d2rq:column "dbo.Supports.Attachment";
+	.
+map:dbo_Supports_SupportAccessible a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Supports;
+	d2rq:property vocab:dbo_Supports_SupportAccessible;
+	d2rq:propertyDefinitionLabel "Supports SupportAccessible";
+	d2rq:column "dbo.Supports.SupportAccessible";
+	.
+map:dbo_Supports_RegistrationID__ref a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:dbo_Supports;
+	d2rq:property vocab:dbo_Supports_RegistrationID;
+	d2rq:refersToClassMap map:dbo_Registrations;
+	d2rq:join "dbo.Supports.RegistrationID => dbo.Registrations.Id";
+	.
+

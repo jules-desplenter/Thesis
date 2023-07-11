@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="dataset">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/test/de/fuberlin/wiwiss/d2rq/d2rq_sdb/dataset/dataset.sql.zip!/" />
+      <root url="jar://$PROJECT_DIR$/test/de/fuberlin/wiwiss/d2rq/d2rq_sdb/dataset/dataset.ttl.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
